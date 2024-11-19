@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-node
+spec:
+  replicas: 2  # number of replicas
+  selector:
+    matchLabels:
+      app: hello-world-node
+  template:
+    metadata:
+      labels:
+        app: hello-world-node
+    spec:
+      containers:
+        - name: hello-world-node
+          image: your-user/your-image:v2  # name and tag of your Docker Hub Image
+          ports:
+            - containerPort: 3000
+      imagePullSecrets:
+        - name: dockerhub-secret  # secret mentioned in readme, with docker hub credentials
